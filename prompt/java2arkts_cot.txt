@@ -1,0 +1,41 @@
+# Examples
+Code to be translated:
+```java
+public void onPageFinished(@NonNull Long instanceIdArg, @NonNull Long webViewInstanceIdArg, @NonNull String urlArg, @NonNull Reply<Void> callback) {
+  BasicMessageChannel<Object> channel = new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.webview_flutter_android.WebViewClientFlutterApi.onPageFinished", getCodec());
+  channel.send(new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg)), channelReply -> callback.reply(null));
+}
+```
+Dependencies that used during translation:
+```arkts
+private binaryMessenger: BinaryMessenger;
+
+static getCodec(): MessageCodec<ESObject> {
+  return new StandardMessageCodec();
+}
+```
+An example of translation pattern:
+```java
+public void postMessage(@NonNull Long instanceIdArg, @NonNull String messageArg, @NonNull Reply<Void> callback) {
+  BasicMessageChannel<Object> channel = new BasicMessageChannel<>(binaryMessenger, "dev.flutter.pigeon.webview_flutter_android.JavaScriptChannelFlutterApi.postMessage", getCodec());
+  channel.send(new ArrayList<Object>(Arrays.asList(instanceIdArg, messageArg)), channelReply -> callback.reply(null));
+}
+```
+```arkts
+postMessage(instanceIdArg: number, messageArg: string, callback: Reply<void>) {
+  const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(this.binaryMessenger, "dev.flutter.pigeon.webview_flutter_ohos.JavaScriptChannelFlutterApi.postMessage", JavaScriptChannelFlutterApi.getCodec());
+  channel.send([instanceIdArg, messageArg], (channelReply: ESObject) => callback.reply(null));
+}
+```
+Explanation:
+In translation example from Java to ArkTS, the keywords public and void are removed. @NonNull annotations were replaced with type annotations for parameters (number and string). The creation of the BasicMessageChannel remains consistent, but the translated version uses ESObject for the channel type. According to the dependencies, the parameters of BasicMessageChannel are binaryMessenger and getCodec(). However, the string "webview_flutter_android" is changed to "webview_flutter_ohos". Finally, the syntax is adjusted to align with Typescript conventions.
+
+Based on the above explanation, the translated result is:
+```arkts
+onPageFinished(instanceIdArg: number, webViewInstanceIdArg: number, urlArg: string, callback: Reply<void>): void {
+  const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(this.binaryMessenger, "dev.flutter.pigeon.webview_flutter_ohos.WebViewClientFlutterApi.onPageFinished", WebViewClientFlutterApi.getCodec());
+  channel.send([instanceIdArg, webViewInstanceIdArg, urlArg], (channelReply: ESObject) => callback.reply(null));
+}
+```
+
+# Now the translation is

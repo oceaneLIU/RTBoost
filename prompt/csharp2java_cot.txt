@@ -1,0 +1,59 @@
+# Examples
+Code to be translated:
+```c_sharp
+public virtual ApproveSkillResponse ApproveSkill(ApproveSkillRequest request)
+{
+    var options = new InvokeOptions();
+    options.RequestMarshaller = ApproveSkillRequestMarshaller.Instance;
+    options.ResponseUnmarshaller = ApproveSkillResponseUnmarshaller.Instance;
+    return Invoke<ApproveSkillResponse>(request, "sendingemail", options);
+}
+```
+Dependencies that used during translation:
+```java
+private static final String DEFAULT_SIGNING_NAME = "sendingemail";
+
+protected final <T extends AmazonWebServiceRequest> T beforeClientExecution(T request) {
+    T local = request;
+    for (RequestHandler2 handler : requestHandler2s) {
+        local = (T) handler.beforeExecution(local);
+    }
+    return local;
+}
+
+protected final void endClientExecution(
+        AWSRequestMetrics awsRequestMetrics, Request<?> request,
+        Response<?> response) {
+    this.endClientExecution(awsRequestMetrics, request, response,
+            !LOGGING_AWS_REQUEST_METRIC);
+}
+```
+An example of translation pattern:
+```c_sharp
+public virtual CreateContactResponse CreateContact(CreateContactRequest request)
+{
+    var options = new InvokeOptions();
+    options.RequestMarshaller = CreateContactRequestMarshaller.Instance;
+    options.ResponseUnmarshaller = CreateContactResponseUnmarshaller.Instance;
+    return Invoke<CreateContactResponse>(request, options);
+}
+```
+```java
+@Override
+public CreateContactResult createContact(CreateContactRequest request) {
+    request = beforeClientExecution(request);
+    return executeCreateContact(request);
+}
+```
+Explanation:
+In translation from C# to Java, the virtual keyword is replaced by the @Override annotation to indicate the method’s potential for overwriting. The method name is adapted to Java's lower camelCase naming convention. The return type is adjusted to match the Java equivalent. The method parameter remains consistent across both languages, so no changes are required there. As the InvokeOptions is not present in the Java dependencies, it’s replaced by the method beforeClientExecution in dependencies. For the return statement, the C# method call Invoke is translated to the Java executeCreateContact method, and according to dependencies (DEFAULT_SIGNING_NAME = "sendingemail"), the DEFAULT_SIGNING_NAME should be used in the return statement of translated result.
+Based on the above explanation, the translated result is:
+```java
+@Override
+public ApproveSkillResult approveSkill(ApproveSkillRequest request) {
+    request = beforeClientExecution(request);
+    return executeApproveSkill(request, DEFAULT_SIGNING_NAME);
+}
+```
+
+# Now the translation is

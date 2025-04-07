@@ -1,0 +1,2 @@
+RepoTrans/java_csharp/aws.zip filter=lfs diff=lfs merge=lfs -text
+RepoTrans/java_csharp/xobotos.zip filter=lfs diff=lfs merge=lfs -text

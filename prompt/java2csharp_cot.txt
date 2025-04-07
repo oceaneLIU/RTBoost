@@ -1,0 +1,52 @@
+# Examples
+Code to be translated:
+```java
+@Override
+public ApproveSkillResult approveSkill(ApproveSkillRequest request) {
+    request = beforeClientExecution(request);
+    return executeApproveSkill(request, "sendingemail");
+}
+```
+Dependencies that used during translation:
+```c_sharp
+private static final String DEFAULT_SIGNING_NAME = "sendingemail";
+
+public static ApproveSkillRequestMarshaller Instance
+{
+    get
+    {
+        return _instance;
+    }
+}
+```
+An example of translation pattern:
+```java
+@Override
+public CreateContactResult createContact(CreateContactRequest request) {
+    request = beforeClientExecution(request);
+    return executeCreateContact(request);
+}
+```
+```c_sharp
+public virtual CreateContactResponse CreateContact(CreateContactRequest request)
+{
+    var options = new InvokeOptions();
+    options.RequestMarshaller = CreateContactRequestMarshaller.Instance;
+    options.ResponseUnmarshaller = CreateContactResponseUnmarshaller.Instance;
+    return Invoke<CreateContactResponse>(request, options);
+}
+Explanation:
+In translation from Java to C#, the @Override annotation is no longer needed, and instead, the virtual keyword is introduced in C# to indicate the method’s potential for being overridden. The method name is adapted to C#'s PascalCase naming convention. The return type is adjusted to match the C# equivalent. The method parameter remains consistent across both languages, so no changes are required there. As the beforeClientExecution method is not present in the C# dependencies, it’s replaced by a series of three statements that configure the InvokeOptions object by the input (request) related object in C#. According to the dependencies that may be used, the translated result uses ApproveSkillRequestMarshaller.Instance. For the return statement, the Java method call executeCreateContact is translated to the C# Invoke method, and according to dependencies (DEFAULT_SIGNING_NAME = "sendingemail"), the DEFAULT_SIGNING_NAME should be used in the return statement of translated result.
+Based on the above explanation, the translated result is:
+```c_sharp
+public virtual ApproveSkillResponse ApproveSkill(ApproveSkillRequest request)
+{
+    var options = new InvokeOptions();
+    options.RequestMarshaller = ApproveSkillRequestMarshaller.Instance;
+    options.ResponseUnmarshaller = ApproveSkillResponseUnmarshaller.Instance;
+    return Invoke<ApproveSkillResponse>(request, DEFAULT_SIGNING_NAME, options);
+}
+
+```
+
+# Now the translation is

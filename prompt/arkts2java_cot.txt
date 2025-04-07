@@ -1,0 +1,80 @@
+# Examples
+Code to be translated:
+```arkts
+onPageFinished(
+  instanceIdArg: number,
+  webViewInstanceIdArg: number,
+  urlArg: string,
+  callback: Reply<void>
+): void {
+  const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+    this.binaryMessenger,
+    "dev.flutter.pigeon.webview_flutter_ohos.WebViewClientFlutterApi.onPageFinished",
+    WebViewClientFlutterApi.getCodec()
+  );
+  channel.send(
+    [instanceIdArg, webViewInstanceIdArg, urlArg],
+    (channelReply: ESObject) => callback.reply(null)
+  );
+}
+```
+Dependencies that used during translation:
+```java
+private final @NonNull BinaryMessenger binaryMessenger;
+
+static @NonNull MessageCodec<Object> getCodec() {
+  return new StandardMessageCodec();
+}
+```
+An example of translation pattern:
+```arkts
+postMessage(
+  instanceIdArg: number, messageArg: string, callback: Reply<void>
+) {
+
+  const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+    this.binaryMessenger,
+    "dev.flutter.pigeon.webview_flutter_ohos.JavaScriptChannelFlutterApi.postMessage",
+    JavaScriptChannelFlutterApi.getCodec()
+  );
+  channel.send(
+    [instanceIdArg, messageArg],
+    (channelReply: ESObject) => callback.reply(null)
+  );
+}
+```
+```java
+public void postMessage(
+    @NonNull Long instanceIdArg, @NonNull String messageArg, @NonNull Reply<Void> callback) {
+  BasicMessageChannel<Object> channel =
+      new BasicMessageChannel<>(
+          binaryMessenger,
+          "dev.flutter.pigeon.webview_flutter_android.JavaScriptChannelFlutterApi.postMessage",
+          getCodec());
+  channel.send(
+      new ArrayList<Object>(Arrays.asList(instanceIdArg, messageArg)),
+      channelReply -> callback.reply(null));
+}
+```
+Explanation:
+In translation example from ArkTS to Java, the keywords public and void are added. The @NonNull annotations are added from ArkTS to Java for parameters. The creation of the BasicMessageChannel remains consistent, but the Java version uses Object for the channel type. According to the dependencies that used during translation, the parameters of BasicMessageChannel are binaryMessenger and getCodec(), therefore it is directly used in the translation results. However, the string "webview_flutter_ohos" is changed to "webview_flutter_android" to adapt the migration. Data is sent as a ArrayList in Java.  Finally, while the logic of handling the callback is preserved, the syntax is adjusted to align with Java conventions.
+
+Based on the above explanation, the translated result is:
+```java
+public void onPageFinished(
+    @NonNull Long instanceIdArg,
+    @NonNull Long webViewInstanceIdArg,
+    @NonNull String urlArg,
+    @NonNull Reply<Void> callback) {
+  BasicMessageChannel<Object> channel =
+      new BasicMessageChannel<>(
+          binaryMessenger,
+          "dev.flutter.pigeon.webview_flutter_android.WebViewClientFlutterApi.onPageFinished",
+          getCodec());
+  channel.send(
+      new ArrayList<Object>(Arrays.asList(instanceIdArg, webViewInstanceIdArg, urlArg)),
+      channelReply -> callback.reply(null));
+}
+```
+
+# Now the translation is
