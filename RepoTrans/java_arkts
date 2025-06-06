@@ -1,0 +1,15 @@
+The dataset used for Java<->ArkTS translation is located in the java_arkts_dataset directory and is organized as follows:
+
+
+├─ java_arkts_dataset    # Parallel dataset for the translation between Java and ArkTS
+    ├─ java_arkts.xlsx    # Java ↔ ArkTS translation pairs with corresponding position in repository
+    ├─ camera.zip    # The followings are repositories of the translation pairs, each of which contains a Java and an ArkTS sub-repository for translation
+    ├─ file_selector.zip
+    ├─ image_picker.zip
+    ├─ local_auth.zip
+    ├─ path_provider.zip
+    ├─ pigeon.zip
+    ├─ shared_preferences.zip
+    ├─ url_launcher.zip
+    ├─ video_player.zip
+    └─ webview_flutter.zip

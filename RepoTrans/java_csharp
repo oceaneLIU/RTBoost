@@ -1,0 +1,12 @@
+The dataset used for Java<->C# translation is located in the java_csharp_dataset directory and is organized as follows:
+
+
+├─ java_csharp_dataset    # Parallel dataset for the translation between Java and C#
+   ├─ java_csharp.xlsx    # Java ↔ C# translation pairs with corresponding position in repository
+   ├─ antlr.zip    # The followings are repositories of the translation pairs, each of which contains a Java and an C# sub-repository for translation
+   ├─ aws.zip
+   ├─ jgit.zip
+   ├─ lucene.zip
+   ├─ openapi.zip
+   ├─ poi.zip
+   ├─ xobotos.zip

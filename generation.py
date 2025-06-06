@@ -31,12 +31,12 @@ def main(args):
 
     if args.source_language == "arkts" or args.target_language == "arkts":
         df = pd.read_excel(f"./RepoTrans/java_arkts/java_arkts.xlsx")
-        repo_dir = "RepoTrans/java_arkts/"
+        repo_dir = "RepoTrans/java_arkts_dataset/"
         repo_language1 = Language.Java
         repo_language2 = Language.ArkTS
     else:
         df = pd.read_excel(f"./RepoTrans/java_csharp/java_csharp.xlsx")
-        repo_dir = "RepoTrans/java_csharp/"
+        repo_dir = "RepoTrans/java_csharp_dataset/"
         repo_language1 = Language.Java
         repo_language2 = Language.CSharp
 

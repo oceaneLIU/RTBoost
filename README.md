@@ -15,7 +15,7 @@ The structure of this project is shown as follows:
 
 ```
 ├─ RepoTrans    # Repository context aware code translation dataset
-    ├─ java_arkts    # Parallel dataset for the translation between Java and ArkTS
+    ├─ java_arkts_dataset    # Parallel dataset for the translation between Java and ArkTS
         ├─ java_arkts.xlsx    # Java ↔ ArkTS translation pairs with corresponding position in repository
         ├─ camera.zip    # The followings are repositories of the translation pairs, each of which contains a Java and an ArkTS sub-repository for translation
         ├─ file_selector.zip
@@ -27,7 +27,7 @@ The structure of this project is shown as follows:
         ├─ url_launcher.zip
         ├─ video_player.zip
         └─ webview_flutter.zip
-    ├─ java_csharp    # Parallel dataset for the translation between Java and C#
+    ├─ java_csharp_dataset    # Parallel dataset for the translation between Java and C#
         ├─ java_csharp.xlsx    # Java ↔ C# translation pairs with corresponding position in repository
         ├─ antlr.zip    # The followings are repositories of the translation pairs, each of which contains a Java and an C# sub-repository for translation
         ├─ aws.zip
